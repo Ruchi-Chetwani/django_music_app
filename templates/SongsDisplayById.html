@@ -1,0 +1,169 @@
+<style type='text/css'>
+.root{
+display:flex;
+align-items:center;
+justify-content:center;
+}
+ .subdiv{
+   width:600px;
+   height:auto;
+   border: 0.5px solid #b2bec3;
+   padding:6px;
+   margin-top:30px;
+   border-radius:10px;
+   background-color:#d4decb;
+
+ }
+ .heading{
+   width:auto;
+   height:auto;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   border: 0.5px solid #b2bec3;
+   border-top-right-radius:10px;
+   border-top-left-radius:10px;
+   padding:6px;
+   background-color:#9c9695;
+
+
+ }
+ .title{
+   color:#ffffff;
+ }
+ .divbtn{
+    display:flex;
+    align-items:center;
+   justify-content:center;
+
+ }
+ .space{
+    margin:8px;
+    width:130px;
+    border-radius:0.6rem;
+ }
+ .iradio{
+   width:35px;
+   height:35px;
+   margin: 0 10px;
+   }
+  .radiotext{
+    margin-left:60px;
+  }
+
+</style>
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+<html lang="en">
+<head>
+
+    <title>MusicMusic</title>
+</head>
+<body>
+<form action="/songseditdeletesubmit" method="post" enctype="multipart/form-data"> {% csrf_token %}
+<div class="root">
+    <div class="subdiv">
+        <div class="heading">
+            <h3 class="title">Songs Register</h3>
+        </div>
+    <div class="form-group">
+    <label>Song Id</label>
+    <input type="text" name="sid" readonly="true" value='{{row.0}}' class="form-control" placeholder="Enter Category Name:">
+    </div>
+
+    <div class="form-group">
+    <label>Sub-Category Id</label>
+    <input type="text" name="scid" class="form-control" readonly="true" value="{{row.1}}" placeholder="Enter Sub-Category Id:">
+    </div>
+
+    <div class="form-group">
+    <label>Title:</label>
+    <input type="text" name="title" value="{{row.2}}" class="form-control" placeholder="Enter Title:">
+    </div>
+        <div class="form-group">
+    <label>Release year:</label>
+    <input type="number" name="ryear" class="form-control" value="{{row.3}}" placeholder="Enter Release year:">
+    </div>
+        <div class="form-group">
+    <label>Lyrics:</label>
+    <input type="file" name="lyrics" class="form-control">
+    </div>
+         <div class="form-group">
+         <label >Status:</label>
+          <span class="radiotext">Movie</span>   <input type="radio"  name="status" class="iradio" required value="Movie">
+           <span class="radiotext">Album</span>    <input type="radio"  name="status"class="iradio" required value="Album">
+          </div>
+
+         <div class="form-group">
+         <label >Type:&nbsp;&nbsp;&nbsp;  </label>
+          <span class="radiotext">Audio</span>   <input type="radio"  name="type" class="iradio"required value="Audio">
+           <span class="radiotext">Video</span>    <input type="radio"  name="type"class="iradio" required value="Video">
+          </div>
+
+    <div class="form-group">
+    <label>Singers:</label>
+    <input type="text" name="singers" class="form-control" value="{{row.7}}" placeholder="Enter Singers:">
+    </div>
+
+     <div class="form-group">
+    <label>Director:</label>
+    <input type="text" name="dir" class="form-control" value="{{row.8}}" placeholder="Enter Director:">
+    </div>
+
+     <div class="form-group">
+    <label>Music Company:</label>
+    <input type="text" name="mcompany" class="form-control" value="{{row.9}}" placeholder="Enter Music Company:">
+    </div>
+
+    <div class="form-group divbtn">
+    <input type="submit" value="Edit" name="btn" class="btn btn-primary space" >
+     <input type="submit" value="Delete" name="btn" class="btn btn-primary space" >
+    </div>
+
+
+</div>
+  </div>
+
+
+</form>
+
+
+<form action="/songseditpicture" method="post" enctype="multipart/form-data"> {% csrf_token %}
+    <input type="text" name="sid" hidden readonly="true" value='{{row.0}}' class="form-control" placeholder="Enter Category Name:">
+   <div class="root">
+    <div class="subdiv" >
+     <div class="form-row subdiv">
+        <div class="col">
+        <label>Poster:</label>
+        <input type="file"name="sicon" required class="form-control" >
+        </div>
+        <div class="col">
+            <img src="/static/{{row.10}}" class="rounded mx-auto d-block" width="80" height="80">
+        </div>
+            <div class="form-group divbtn">
+        <input type="submit"  value="Edit Picture" name="btn" class="btn btn-primary space" >
+
+    </div>
+    </div>
+
+         </div>
+
+  </div>
+
+
+</form>
+</body>
+</html>
+
+
+
